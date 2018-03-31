@@ -13,18 +13,13 @@ namespace CSharp_Delegates_Events
             Video video = new Video() { Title = "Video 1"};
             VideoEncoder videoEncoder = new VideoEncoder(); //publisher
             MailService mailService = new MailService();  //subscriber
+            MessageService messageService = new MessageService(); //subscriber
+
             videoEncoder.VideoEncoded += mailService.OnVideoEncoded;
+            videoEncoder.VideoEncoded += messageService.OnVideoEncoded;
             videoEncoder.Encode(video);
 
             Console.ReadKey();
-        }
-    }
-
-    public class MailService
-    {
-        public void OnVideoEncoded(object source, EventArgs e)
-        {
-            Console.WriteLine("MailService: Sending an email...");
         }
     }
 }
